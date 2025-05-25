@@ -127,6 +127,18 @@ function copyCodeBlock(option?: any) {
   const largestLineNumber = lastSelection.end.line + 1;
   const largestLineNumberLength = largestLineNumber.toString().length;
 
+  // Helper function to get selected text or current line text
+  function getSelectedOrCurrentLineText(selection: vscode.Selection): string {
+    if (selection.isEmpty) {
+      // No selection, return current line text
+      const line = document.lineAt(selection.active.line);
+      return line.text;
+    } else {
+      // Has selection, return selected text
+      return document.getText(selection);
+    }
+  }
+
   let placeHolderMap = new Map<string, ReplaceRule>([
     ["fullPath", { re: /\$\{fullPath\}/g, str: fullPath }],
     [
@@ -186,9 +198,14 @@ function copyCodeBlock(option?: any) {
   selections.forEach((selection, i) => {
     if (multipleSelectionCreateMultipleCodeBlocks || i === 0) {
       const topLineNumber = selection.start.line + 1;
+      const selectedCode = getSelectedOrCurrentLineText(selection);
       placeHolderMap.set("topLineNumber", {
         re: /\$\{topLineNumber\}/g,
         str: topLineNumber.toString(),
+      });
+      placeHolderMap.set("SELECTED_CODE", {
+        re: /\$\{SELECTED_CODE\}/g,
+        str: selectedCode,
       });
       let codeBlockHeader = replacePlaceHolderMap(
         codeBlockHeaderFormat,
@@ -197,6 +214,11 @@ function copyCodeBlock(option?: any) {
       codeLine = replacePlaceHolderMap(codeLineFormat, placeHolderMap);
       copyText += codeBlockHeader;
     } else {
+      const selectedCode = getSelectedOrCurrentLineText(selection);
+      placeHolderMap.set("SELECTED_CODE", {
+        re: /\$\{SELECTED_CODE\}/g,
+        str: selectedCode,
+      });
       let multipleSelectionsBoundalyMarker = replacePlaceHolderMap(
         multipleSelectionsBoundalyMarkerFormat,
         placeHolderMap
@@ -219,6 +241,10 @@ function copyCodeBlock(option?: any) {
 
       let c = codeLine.replace("${LINENUMBER}", number);
       c = c.replace("${CODE}", line);
+      c = c.replace(
+        "${SELECTED_CODE}",
+        getSelectedOrCurrentLineText(selection)
+      );
       copyText += c;
     }
     if (

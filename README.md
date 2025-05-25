@@ -96,6 +96,7 @@ You can use it by specifying "formatName" with "args" parameter of key binding.
 | ${pathParse.name}               | node.js path.parse() 'name'                                   | copy-code-block                                        |
 | ${languageId}                   | Language identified by vscode.                                | typescript                                             |
 | ${topLineNumber}                | The start of the selection or the line number of the cursor.  | 10                                                     |
+| ${SELECTED_CODE}                | Selected text or current line text if no selection.          | console.log('Hello World');                           |
 | ${YYYY}                         | Current 4-digit year.                                         | 2018                                                   |
 | ${MM}                           | Current month. "01"-"12"                                      | 03                                                     |
 | ${DD}                           | Current day. "01"-"31"                                        | 28                                                     |
@@ -181,6 +182,30 @@ You can use it by specifying "formatName" with "args" parameter of key binding.
 	    }
 	}
 	</code></pre>
+```
+
+### Selected code block format (NEW!)
+```json
+    {
+        "formatName": "selected",
+        "codeBlockHeaderFormat": "${fullPath}:${topLineNumber}${EOL}Selected Code:${EOL}",
+        "codeBlockFooterFormat": "${EOL}",
+        "codeLineFormat": "${SELECTED_CODE}${EOL}",
+        "multipleSelectionCreateMultipleCodeBlocks": false,
+        "multipleSelectionsBoundalyMarkerFormat": "---${EOL}",
+        "forcePathSeparatorSlash": true,
+        "forceSpaceIndent": true
+    }
+```
+
+```plaintext
+	e:/Works/vscode-copy-code-block/src/copy-code-block.ts:10
+	Selected Code:
+	export const packaged_commands: { [ key: string ]: ( args: any ) => void } = {
+	    [ COPY_CODE_BLOCK ]: ( option: any ) => {
+	        copyCodeBlock( option )
+	    }
+	}
 ```
 
 ## Acknowledgments
