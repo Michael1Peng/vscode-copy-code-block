@@ -4,7 +4,10 @@
 
 ### 主要目标
 
-为 VSCode Copy Code Block 扩展添加 `${SELECTED_CODE}` 令牌支持，使用户能够复制选中的代码块内容。
+为 VSCode Copy Code Block 扩展添加新的令牌支持：
+
+1. ✅ `${SELECTED_CODE}` 令牌 - 已完成
+2. 🔄 `${MARKDOWN_HEADING}` 令牌 - 当前开发中
 
 ### 优先级排序
 

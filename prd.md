@@ -1,1 +1,2 @@
-- 现在 settings 只能拿到 ${CODE}, 是当前光标所在的行内容。添加一个参数 ${SELECTED_CODE} 来拿到当前选中的内容
+- [x] 现在 settings 只能拿到 ${CODE}, 是当前光标所在的行内容。添加一个参数 ${SELECTED_CODE} 来拿到当前选中的内容
+- [ ] 如果当前处在的行内容为 markdown 文件的标题，以 # 开始，则输出到参数 ${MARKDOWN_HEADING}。比如说 "### title" 输出 ${MARKDOWN_HEADING} 为 "title"
