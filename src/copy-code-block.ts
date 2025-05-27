@@ -187,6 +187,19 @@ function copyCodeBlock(option?: any) {
     ["CRLF", { re: /\$\{CRLF\}/g, str: "\r\n" }],
   ]);
 
+  // MARKDOWN_HEADING: 如果当前行为 markdown 标题，则提取标题文本，否则为空
+  let markdownHeading = "";
+  // 只取主 selection 的起始行
+  const mainLineText = document.lineAt(editor.selection.active.line).text;
+  const headingMatch = mainLineText.match(/^\s*#+\s*(.+)$/);
+  if (headingMatch) {
+    markdownHeading = headingMatch[1].trim();
+  }
+  placeHolderMap.set("MARKDOWN_HEADING", {
+    re: /\$\{MARKDOWN_HEADING\}/g,
+    str: markdownHeading,
+  });
+
   let codeLine = "";
   let copyText = "";
   let tabSize: number = 4;

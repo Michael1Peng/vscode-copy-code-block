@@ -2,7 +2,7 @@
     "name": "copy-code-with-path",
     "displayName": "Copy Code with Path",
     "description": "Copy code with filename and line number, customized format.",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "publisher": "little-lion-39",
     "engines": {
         "vscode": "^1.77.0"
@@ -57,7 +57,7 @@
                             "codeLineFormat": {
                                 "type": "string",
                                 "default": "${LINENUMBER}: ${CODE}${EOL}",
-                                "description": "The available tokens are the following in addition to codeBlockHeaderFormat.\n${LINENUMBER}                  : Line number.\n${CODE}                        : Line text.\n${SELECTED_CODE}               : Selected text or current line text if no selection."
+                                "description": "The available tokens are the following in addition to codeBlockHeaderFormat.\n${LINENUMBER}                  : Line number.\n${CODE}                        : Line text.\n${SELECTED_CODE}               : Selected text or current line text if no selection.\n${MARKDOWN_HEADING}            : Markdown heading text (without # symbols) if current line is a heading, empty otherwise."
                             },
                             "multipleSelectionCreateMultipleCodeBlocks": {
                                 "type": "boolean",

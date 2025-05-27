@@ -4,6 +4,19 @@ All notable changes to the "copy-code-block" extension will be documented in thi
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
 
+## [0.1.1] - 2025-05-27
+
+### Added
+- New `${MARKDOWN_HEADING}` token that extracts markdown heading text from lines starting with `#`
+- Support for all markdown heading levels (# through ######)
+- Automatic heading text extraction with proper whitespace handling
+- Graceful handling of non-heading lines (returns empty string)
+
+### Technical
+- Robust regex pattern matching for markdown headings
+- Integration with existing placeholder system
+- Minimal code impact with efficient implementation
+
 ## [0.1.0] - 2024-12-19
 
 ### Added

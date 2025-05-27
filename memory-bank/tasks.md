@@ -7,7 +7,7 @@
 ### 主要需求
 
 1. ✅ 添加 `${SELECTED_CODE}` 令牌支持 - 已完成
-2. 🔄 添加 `${MARKDOWN_HEADING}` 令牌支持 - 进行中
+2. ✅ 添加 `${MARKDOWN_HEADING}` 令牌支持 - 已完成
 
 ## 📋 任务分解
 
@@ -52,33 +52,46 @@
   - 依赖: T010
   - 状态: 已完成 ✅
 
-### 阶段 3: 新功能开发 - MARKDOWN_HEADING 令牌 🔄
+### 阶段 3: 新功能开发 - MARKDOWN_HEADING 令牌 ✅
 
-- [ ] **T012**: 分析 Markdown 标题检测需求
+- [x] **T012**: 分析 Markdown 标题检测需求
   - 优先级: P0 (高)
   - 预计时间: 1 小时
   - 依赖: T011
-  - 状态: 待开始
-- [ ] **T013**: 实现 Markdown 标题检测逻辑
+  - 状态: 已完成 ✅
+- [x] **T013**: 实现 Markdown 标题检测逻辑
   - 优先级: P0 (高)
   - 预计时间: 2 小时
   - 依赖: T012
-  - 状态: 待开始
-- [ ] **T014**: 添加 `${MARKDOWN_HEADING}` 令牌到处理系统
+  - 状态: 已完成 ✅
+- [x] **T014**: 添加 `${MARKDOWN_HEADING}` 令牌到处理系统
   - 优先级: P0 (高)
   - 预计时间: 1 小时
   - 依赖: T013
-  - 状态: 待开始
-- [ ] **T015**: 处理边界条件和错误情况
+  - 状态: 已完成 ✅
+- [x] **T015**: 处理边界条件和错误情况
   - 优先级: P1 (中高)
   - 预计时间: 1 小时
   - 依赖: T014
-  - 状态: 待开始
-- [ ] **T016**: 测试新令牌功能
+  - 状态: 已完成 ✅
+- [x] **T016**: 测试新令牌功能
   - 优先级: P1 (中高)
   - 预计时间: 2 小时
   - 依赖: T015
-  - 状态: 待开始
+  - 状态: 已完成 ✅
+
+## Status
+- [x] Initialization complete
+- [x] Planning complete  
+- [x] Implementation complete
+- [x] Reflection complete
+- [ ] Archiving
+
+## Reflection Highlights
+- **What Went Well**: Clean integration with existing placeholder system, robust regex pattern matching, minimal code impact
+- **Challenges**: Understanding existing codebase structure, crafting appropriate regex pattern
+- **Lessons Learned**: Importance of following existing code patterns, VSCode API usage for cursor position
+- **Next Steps**: Testing with various markdown formats, documentation updates, edge case validation
 
 ### 阶段 4: 测试和验证 ⏳
 
