@@ -71,24 +71,29 @@ function getFormatConfiguration(option?: any): FormatConfiguration {
 
 function getPathInfo(document: vscode.TextDocument, forcePathSeparatorSlash: boolean): PathInfo {
   let fullPath = document.fileName;
-  let workspaceFolderRelativePath = vscode.workspace.workspaceFolders
-    ? path.relative(vscode.workspace.workspaceFolders[0].uri.fsPath, fullPath)
+  
+  // 获取当前文件所属的工作区文件夹
+  const workspaceFolder = vscode.workspace.getWorkspaceFolder(document.uri);
+  const workspaceFolderPath = workspaceFolder?.uri.fsPath || '';
+  
+  let workspaceFolderRelativePath = workspaceFolder
+    ? path.relative(workspaceFolderPath, fullPath)
     : fullPath;
+  
   const fileBasename = path.basename(fullPath);
   const fileExtname = path.extname(fullPath);
   const fileBasenameWithoutExtension = path.basename(fullPath, fileExtname);
-  let workspaceFolder = vscode.workspace.workspaceFolders
-    ? vscode.workspace.workspaceFolders[0].uri.fsPath
-    : '';
   let fileDirname = path.dirname(fullPath);
   let pathSeparator = path.sep;
   const osPathSeparator = path.sep;
   let pathParse = path.parse(fullPath);
 
+  let workspaceFolderForReturn = workspaceFolderPath;
+
   if (forcePathSeparatorSlash) {
     fullPath = fullPath.replace(/\\/g, '/');
     workspaceFolderRelativePath = workspaceFolderRelativePath.replace(/\\/g, '/');
-    workspaceFolder = workspaceFolder.replace(/\\/g, '/');
+    workspaceFolderForReturn = workspaceFolderForReturn.replace(/\\/g, '/');
     fileDirname = fileDirname.replace(/\\/g, '/');
     pathParse.root = pathParse.root.replace(/\\/g, '/');
     pathParse.dir = pathParse.dir.replace(/\\/g, '/');
@@ -104,7 +109,7 @@ function getPathInfo(document: vscode.TextDocument, forcePathSeparatorSlash: boo
     fileBasename,
     fileExtname,
     fileBasenameWithoutExtension,
-    workspaceFolder,
+    workspaceFolder: workspaceFolderForReturn,
     fileDirname,
     pathSeparator,
     osPathSeparator,
@@ -244,7 +249,7 @@ function copyCodeBlock(option?: any) {
       const number = leftPad(String(n + 1), largestLineNumberLength, ' ');
       let line = document.lineAt(n).text;
       if (config.forceSpaceIndent) {
-        line = line.replace(/^(\t+)/, (match: string, p1: string) => {
+        line = line.replace(/^(\t+)/, (_, p1: string) => {
           return ' '.repeat(p1.length * tabSize);
         });
       }
