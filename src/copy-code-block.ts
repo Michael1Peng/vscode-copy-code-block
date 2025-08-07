@@ -119,7 +119,7 @@ function copyCodeBlock(option?: any) {
     pathSeparator = "/";
   }
 
-  // 選択部分は複数あり得る
+  // 選択部分は複数あり得る,,,
   const selections = [...editor.selections].sort(
     (a, b) => a.start.line - b.start.line
   );
@@ -175,6 +175,7 @@ function copyCodeBlock(option?: any) {
     ["pathParse.name", { re: /\$\{pathParse\.name\}/g, str: pathParse.name }],
     ["languageId", { re: /\$\{languageId\}/g, str: languageId }],
     ["topLineNumber", { re: /\$\{topLineNumber\}/g, str: "1" }],
+    ["LINENUMBER", { re: /\$\{LINENUMBER\}/g, str: "1" }],
     ["YYYY", { re: /\$\{YYYY\}/g, str: YYYY }],
     ["MM", { re: /\$\{MM\}/g, str: MM }],
     ["DD", { re: /\$\{DD\}/g, str: DD }],
@@ -252,12 +253,15 @@ function copyCodeBlock(option?: any) {
         );
       }
 
-      let c = codeLine.replace("${LINENUMBER}", number);
-      c = c.replace("${CODE}", line);
-      c = c.replace(
-        "${SELECTED_CODE}",
-        getSelectedOrCurrentLineText(selection)
-      );
+      placeHolderMap.set("LINENUMBER", {
+        re: /\$\{LINENUMBER\}/g,
+        str: number,
+      });
+      placeHolderMap.set("CODE", {
+        re: /\$\{CODE\}/g,
+        str: line,
+      });
+      let c = replacePlaceHolderMap(codeLine, placeHolderMap);
       copyText += c;
     }
     if (
