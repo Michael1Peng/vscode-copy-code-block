@@ -273,12 +273,12 @@ function copyCodeBlock(option?: any) {
     }
   });
 
-  // copy to clipboard.
+  // 复制到剪贴板
   vscode.env.clipboard.writeText(copyText);
 }
 
 /**
- * 右詰左パディング
+ * 左填充（右对齐）
  */
 function leftPad(str: string, len: number, ch: string = ' ') {
   if (ch.length === 0) {
@@ -292,9 +292,9 @@ function leftPad(str: string, len: number, ch: string = ' ') {
 }
 
 /**
- * 入力文字列中のマーカー正規表現を指定の文字列に置き換える
- * @param str 置き換え元文字列
- * @param placeHolderMap 置き換えルール
+ * 将输入字符串中的标记正则表达式替换为指定字符串
+ * @param str 待替换的原始字符串
+ * @param placeHolderMap 替换规则映射
  */
 function replacePlaceHolderMap(str: string, placeHolderMap: ReplaceRuleMap) {
   for (const [, rule] of placeHolderMap) {
