@@ -2,7 +2,7 @@
     "name": "copy-code-with-path",
     "displayName": "Copy Code with Path",
     "description": "Copy code with filename and line number, customized format.",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "publisher": "little-lion-39",
     "engines": {
         "vscode": "^1.77.0"
